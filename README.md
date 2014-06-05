@@ -2,4 +2,4 @@
 
 用到第三方控件包volley
 
-![截图](https://github.com/scaluo/douban250/blob/master/Screenshot.jpeg)
+![截图](https://raw.githubusercontent.com/scaluo/douban250/master/Screenshot.jpeg)
