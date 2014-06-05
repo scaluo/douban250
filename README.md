@@ -1,3 +1,5 @@
 用豆瓣的电影api做的评分最高的250部电影
 
 用到第三方控件包volley
+
+![截图](https://github.com/scaluo/douban250/blob/master/Screenshot.jpeg)
