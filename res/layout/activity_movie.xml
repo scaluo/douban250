@@ -21,7 +21,15 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:textSize="@dimen/title_font_size"
+                android:layout_margin="@dimen/content_margin"
                 android:text="" />
+            <com.android.volley.toolbox.NetworkImageView
+        		android:id="@+id/imgCover"
+        		android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"
+        		android:layout_gravity="center"
+        		android:layout_margin="@dimen/content_margin"
+        		android:src="@drawable/ic_launcher" />
 			 <TextView
         		android:id="@+id/txtSummary"
         		android:layout_width="wrap_content"

@@ -1,13 +1,8 @@
 package com.scaluo.douban250;
 import java.util.ArrayList;
 import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
-import com.android.volley.toolbox.ImageLoader.ImageCache;
-
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.support.v4.util.LruCache;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,30 +63,10 @@ public class MoviesAdapter extends BaseAdapter{
 		
 		txtYear.setText("放映年份:"+String.valueOf(item.getPubYear()));
 		txtScore.setText("豆瓣评分:"+item.getScore());
-		showImageByNetwork(imgNet,item.getImgSmall());
+		Utils.showImageByNetwork(queue,imgNet,item.getImgSmall());
 	}
 	
-	private void showImageByNetwork(NetworkImageView img,String url){
-		ImageLoader mImageLoader = new ImageLoader(queue,getImageCache());
-		img.setTag(url);
-		img.setImageUrl(url,mImageLoader);
-	}
 	
-	private ImageCache getImageCache(){
-		final LruCache<String,Bitmap> lruCache = new LruCache<String,Bitmap>(20);
-		ImageCache imageCache = new ImageCache(){
-			@Override
-			public Bitmap getBitmap(String key) {
-				// TODO Auto-generated method stub
-				return lruCache.get(key);
-			}
-			@Override
-			public void putBitmap(String key, Bitmap value) {
-				// TODO Auto-generated method stub
-				lruCache.put(key, value);
-			}
-		};
-		return imageCache;
-	}
-
+	
+	
 }

@@ -8,6 +8,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.NetworkImageView;
 import com.android.volley.toolbox.Volley;
 
 import android.app.Activity;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 public class MovieActivity extends Activity {
 	private TextView txtTitle;
 	private TextView txtSummary;
+	private NetworkImageView imgCover;
 	private RequestQueue queue;
 	private String mid;
 	private ProgressBar bar;
@@ -33,6 +35,7 @@ public class MovieActivity extends Activity {
 		mid = String.valueOf(intent.getIntExtra("mid",0));
 		txtTitle = (TextView)findViewById(R.id.txtTitle);
 		txtSummary = (TextView)findViewById(R.id.txtSummary);
+		imgCover = (NetworkImageView)findViewById(R.id.imgCover);
 		bar = (ProgressBar)findViewById(R.id.prgBar);
 		bar.setVisibility(View.GONE);
 		queue = Volley.newRequestQueue(this);
@@ -53,7 +56,9 @@ public class MovieActivity extends Activity {
 					    try {
 					    	String name = response.getString("title");
 					    	String summary = response.getString("summary");
-					    	Movie move = new Movie(name,summary);
+					    	JSONObject imgobj = response.getJSONObject("images");
+					    	String cover = imgobj.getString("large");
+					    	Movie move = new Movie(name,summary,cover);
 					    	setInterface(move);
 						} catch (JSONException e) {
 							// TODO Auto-generated catch block
@@ -76,6 +81,8 @@ public class MovieActivity extends Activity {
 	private void setInterface(Movie move){
 		txtTitle.setVisibility(View.VISIBLE);
 		txtSummary.setVisibility(View.VISIBLE);
+		imgCover.setVisibility(View.VISIBLE);
+		Utils.showImageByNetwork(queue,imgCover,move.getCover());
 		bar.setVisibility(View.GONE);
 		this.txtTitle.setText(move.getName());
 		this.txtSummary.setText(move.getSummary());
@@ -84,6 +91,7 @@ public class MovieActivity extends Activity {
 	private void hidden(){
 		txtTitle.setVisibility(View.GONE);
 		txtSummary.setVisibility(View.GONE);
+		imgCover.setVisibility(View.GONE);
 		bar.setVisibility(View.VISIBLE);
 	}
 	
